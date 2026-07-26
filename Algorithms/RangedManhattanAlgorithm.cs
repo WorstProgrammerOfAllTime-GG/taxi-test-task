@@ -1,8 +1,10 @@
-﻿using System;
+﻿using maxim_technology_task.Models;
+using maxim_technology_task.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task
+namespace maxim_technology_task.Algorithms
 {
     public class RangedManhattanAlgorithm : IAlgorithm
     {

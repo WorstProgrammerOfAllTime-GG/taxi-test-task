@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="OrderService.cs" />
+    <None Include="Services\OrderService.cs" />
   </ItemGroup>
 
 </Project>

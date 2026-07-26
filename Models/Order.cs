@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task
+namespace maxim_technology_task.Models
 {
     public class Order
     {
