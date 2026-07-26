@@ -2,6 +2,7 @@
 using maxim_technology_task.Models;
 using maxim_technology_task.Services;
 using maxim_technology_task.Status;
+using maxim_technology_task.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
