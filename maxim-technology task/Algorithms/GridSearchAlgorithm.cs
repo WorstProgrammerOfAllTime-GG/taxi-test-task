@@ -31,6 +31,10 @@ namespace maxim_technology_task.Algorithms
                 {
                     if (drivers.TryGetValue(coords, out Driver driver))
                     {
+                        if (driver.Status == StatusDriver.Busy)
+                        {
+                            continue;
+                        }
                         result.Add(driver);
                         driver.Status = StatusDriver.Busy;
                         if (result.Count == 5)

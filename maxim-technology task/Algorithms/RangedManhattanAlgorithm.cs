@@ -1,5 +1,6 @@
 ﻿using maxim_technology_task.Models;
 using maxim_technology_task.Services;
+using maxim_technology_task.Status;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,10 @@ namespace maxim_technology_task.Algorithms
             {
                 int distance = Math.Abs(dataDriver.Value.Coordinates.X - coordClient.X) +
                     Math.Abs(dataDriver.Value.Coordinates.Y - coordClient.Y);
+                if (dataDriver.Value.Status == StatusDriver.Busy)
+                {
+                    continue;
+                }
                 result.Add((distance,dataDriver.Value));
             }
 

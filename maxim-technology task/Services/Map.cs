@@ -30,8 +30,6 @@ namespace maxim_technology_task.Services
             }
             var coordinates = new Coordinates(x, y);
 
-            driver.Status = StatusDriver.Free;
-
             if (_driversOnMap.TryAdd(coordinates, driver))
             {           
                 driver.Coordinates = coordinates; 

@@ -9,26 +9,29 @@ using System.Text;
 namespace Testing.TestAlgorithm
 {
     [TestFixture]
-    public class RangedManhattanAlgorithmTest
+    public class GridSearchAlgorithmTest
     {
+
         [Test]
-        public void SearchDrivers_RangedManhattanAlgorithm()
+        public void SearchDrivers_GridAlgorithm()
         {
             Map map = new Map(100,100);
 
             var coordsClient = new Coordinates(50,50);
 
-            var closestDistanceDriver = new Driver();
-            var farDistanceDriver = new Driver();
+            var closestDriver = new Driver();
+            var farDriver = new Driver();
 
-            map.AddDriverCoordinates(45,36, closestDistanceDriver);
-            map.AddDriverCoordinates(84,92, farDistanceDriver);
+            map.AddDriverCoordinates(60, 60, closestDriver);
+            map.AddDriverCoordinates(90, 95, farDriver);
 
-            var algorithm = new RangedManhattanAlgorithm(map);
+            var algorithm = new GridSearchAlgorithm(map);
 
-            List<Driver> drivers = algorithm.SearchDrivers(coordsClient);
-            Assert.That(drivers.Count, Is.EqualTo(1));
-            Assert.That(drivers[0], Is.EqualTo(closestDistanceDriver));
+            List<Driver> drivers =  algorithm.SearchDrivers(coordsClient);
+
+            Assert.That(drivers.Count, Is.EqualTo(2));
+            Assert.That(drivers[0], Is.EqualTo(closestDriver));
+            Assert.That(drivers[drivers.Count-1], Is.EqualTo(farDriver));
         }
 
         [Test]
@@ -40,10 +43,10 @@ namespace Testing.TestAlgorithm
             var busyDriver = new Driver { Status = StatusDriver.Busy };
             var freeDriver = new Driver();
 
-            map.AddDriverCoordinates(51, 51, busyDriver);
-            map.AddDriverCoordinates(60, 60, freeDriver);
+            map.AddDriverCoordinates(51, 51, busyDriver); 
+            map.AddDriverCoordinates(60, 60, freeDriver); 
 
-            var algorithm = new RangedManhattanAlgorithm(map);
+            var algorithm = new GridSearchAlgorithm(map);
 
             List<Driver> drivers = algorithm.SearchDrivers(coordsClient);
 
@@ -62,7 +65,7 @@ namespace Testing.TestAlgorithm
                 map.AddDriverCoordinates(50 + i, 50, new Driver());
             }
 
-            var algorithm = new RangedManhattanAlgorithm(map);
+            var algorithm = new GridSearchAlgorithm(map);
 
             List<Driver> drivers = algorithm.SearchDrivers(coordsClient);
 
