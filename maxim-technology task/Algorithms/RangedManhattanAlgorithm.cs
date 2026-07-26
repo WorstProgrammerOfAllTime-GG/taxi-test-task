@@ -9,7 +9,7 @@ namespace maxim_technology_task.Algorithms
 {
     public class RangedManhattanAlgorithm : IAlgorithm
     {
-        private const int MAX_ALLOWED_DISTANCE = 100;
+        private const int MAX_ALLOWED_DISTANCE = 50;
         private readonly Map _map;
         public RangedManhattanAlgorithm(Map map)
         {
