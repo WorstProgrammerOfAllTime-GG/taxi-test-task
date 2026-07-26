@@ -68,5 +68,17 @@ namespace Testing.TestAlgorithm
 
             Assert.That(drivers.Count, Is.EqualTo(5));
         }
+
+        [Test]
+        public void SearchDrivers_NoFreeDriversOnMap()
+        {
+            var map = new Map(100, 100);
+            var coordsClient = new Coordinates(50, 50);
+            var algorithm = new RangedManhattanAlgorithm(map);
+
+            List<Driver> drivers = algorithm.SearchDrivers(coordsClient);
+
+            Assert.That(drivers, Is.Empty);
+        }
     }
 }
