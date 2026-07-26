@@ -1,6 +1,7 @@
-﻿using maxim_technology_task;
+﻿using BenchmarkDotNet.Running;
+using maxim_technology_task.Benchmark;
 
-Console.WriteLine("Hello World!");
+BenchmarkRunner.Run<BenchmarkTest>();
 
 
 

@@ -9,8 +9,7 @@ namespace maxim_technology_task.Algorithms
 {
     public class RangedManhattanAlgorithm : IAlgorithm
     {
-        private const string TITLE = "Манхэттен с ограничением радиуса";
-        private const int MAX_ALLOWED_DISTANCE = 50;
+        private const int MAX_ALLOWED_DISTANCE = 100;
         private readonly Map _map;
         public RangedManhattanAlgorithm(Map map)
         {
@@ -21,7 +20,6 @@ namespace maxim_technology_task.Algorithms
         {
             var driversOnMap = _map.DriversOnMap;
             var result = new List<(int,Driver)>();
-            Console.WriteLine($"Поиск водителей начался, алгоритм поиска: [{TITLE}]...");
             foreach (var dataDriver in driversOnMap)
             {
                 int distance = Math.Abs(dataDriver.Value.Coordinates.X - coordClient.X) +

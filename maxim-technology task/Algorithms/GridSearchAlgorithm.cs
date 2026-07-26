@@ -9,7 +9,6 @@ namespace maxim_technology_task.Algorithms
 {
     public class GridSearchAlgorithm : IAlgorithm
     {
-        private const string TITLE = "Расширяющийся радиус";
 
         private readonly Map _map;
         
@@ -23,8 +22,7 @@ namespace maxim_technology_task.Algorithms
             const int maxRadius = 100;
             var drivers = _map.DriversOnMap;
             int currentDistance = 0;       
-            List<Driver> result = new List<Driver>();
-            Console.WriteLine($"Поиск водителей начался, алгоритм поиска: [{TITLE}]...");
+            List<Driver> result = new List<Driver>();      
             while (result.Count < 5 && currentDistance<=maxRadius)
             {
                 foreach (var coords in GetCoordinatesByRadius(coordsCleint, currentDistance))
@@ -36,7 +34,6 @@ namespace maxim_technology_task.Algorithms
                             continue;
                         }
                         result.Add(driver);
-                        driver.Status = StatusDriver.Busy;
                         if (result.Count == 5)
                         {
                             return result;

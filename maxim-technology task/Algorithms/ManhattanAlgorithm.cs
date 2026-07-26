@@ -10,7 +10,6 @@ namespace maxim_technology_task.Algorithms
 {
     public class ManhattanAlgorithm : IAlgorithm
     {
-        private const string TITLE = "Манхэттенский алгоритм";
         private readonly Map _map;
         
         public ManhattanAlgorithm(Map map)
@@ -21,8 +20,6 @@ namespace maxim_technology_task.Algorithms
         {
             var driversOnMap = _map.DriversOnMap;
             var result = new List<(int, Driver)>();
-
-            Console.WriteLine($"Поиск водителей начался, алгоритм поиска: [{TITLE}]...");
             foreach (var dataDriver in driversOnMap)
             {     
                 if (dataDriver.Value.Status != StatusDriver.Free)

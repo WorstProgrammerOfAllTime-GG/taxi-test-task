@@ -11,7 +11,6 @@ namespace maxim_technology_task.Algorithms
     public class SectorAlgorithm : IAlgorithm
     {
         private readonly Map _map;
-        private const string TITLE = "Секторный алгоритм";
         public SectorAlgorithm(Map map)
         {
             _map = map;
@@ -20,7 +19,6 @@ namespace maxim_technology_task.Algorithms
         {
             List<(string, int, Driver)> _cardinalPointsDrivers = new List<(string, int, Driver)>();
             var drivers = _map.DriversOnMap;
-            Console.WriteLine($"Поиск водителей начался, алгоритм поиска: [{TITLE}]...");
             foreach (var dataDriver in drivers)
             {
                 if (dataDriver.Value.Status == StatusDriver.Busy)
