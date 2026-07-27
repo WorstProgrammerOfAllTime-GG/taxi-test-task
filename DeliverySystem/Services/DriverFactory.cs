@@ -29,6 +29,7 @@ namespace maxim_technology_task2
                 }
                 Driver driver = new Driver();
                 _map.AddDriverCoordinates(x, y, driver);
+                Console.WriteLine($"Водитель с ID {driver.ID}");
             }
 
             if (drivers.Count < 15) throw new Exception("Не удалось разместить всех водителей на карте"); 
