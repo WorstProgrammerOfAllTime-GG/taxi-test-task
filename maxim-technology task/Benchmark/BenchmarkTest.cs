@@ -1,18 +1,18 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Disassemblers;
-using maxim_technology_task.Algorithms;
-using maxim_technology_task.Models;
+using DeliverySystem.Algorithms;
+using DeliverySystem.Models;
 using System;
-using maxim_technology_task;
+using DeliverySystem;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task.Benchmark
+namespace DeliverySystem.Benchmark
 {
     [MemoryDiagnoser]
     public class BenchmarkTest
     {
-        private maxim_technology_task.Services.Map _map = null!;
+        private DeliverySystem.Services.Map _map = null!;
         private Coordinates _client = new(50, 50);
 
         private ManhattanAlgorithm _manhattan = null!;
@@ -23,7 +23,7 @@ namespace maxim_technology_task.Benchmark
         [GlobalSetup]
         public void Setup()
         {
-            _map = new maxim_technology_task.Services.Map(1000, 1000);
+            _map = new DeliverySystem.Services.Map(1000, 1000);
 
             Random random = new Random(1);
 

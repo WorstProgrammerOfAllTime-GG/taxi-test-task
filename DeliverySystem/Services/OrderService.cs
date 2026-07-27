@@ -1,13 +1,13 @@
-﻿using maxim_technology_task.Algorithms;
-using maxim_technology_task.Models;
-using maxim_technology_task.Services;
-using maxim_technology_task.Status;
-using maxim_technology_task.Exceptions;
+﻿using DeliverySystem.Algorithms;
+using DeliverySystem.Models;
+using DeliverySystem.Services;
+using DeliverySystem.Status;
+using DeliverySystem.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task
+namespace DeliverySystem.Services
 {
     public class OrderService
     {

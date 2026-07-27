@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
-using maxim_technology_task.Benchmark;
+using DeliverySystem.Benchmark;
 
 BenchmarkRunner.Run<BenchmarkTest>();
 

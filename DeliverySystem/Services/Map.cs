@@ -1,11 +1,12 @@
-﻿using maxim_technology_task.Models;
-using maxim_technology_task.Status;
+﻿using DeliverySystem.Models;
+using DeliverySystem.Status;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Reflection.PortableExecutable;
 using System.Text;
 
-namespace maxim_technology_task.Services
+namespace DeliverySystem.Services
 {
     public class Map
     {
@@ -21,13 +22,24 @@ namespace maxim_technology_task.Services
             Console.WriteLine($"Создана карта размерностью {M} * {N}");
         }
 
+        public bool TryAddDriver(string id, Coordinates coordinates, out Driver ? driver)
+        {
+            driver = null;
+
+            var newDriver = new Driver { ID = id };
+
+            if (AddDriverCoordinates(coordinates.X, coordinates.Y, newDriver))
+            {
+                driver = newDriver;
+                return true;
+            }
+
+            return false;
+
+        }
         public bool AddDriverCoordinates(int x, int y, Driver driver)
         {
-
-            if (!VerificationValidCoordinates(x, y))
-            {
-                return false; 
-            }
+            
             var coordinates = new Coordinates(x, y);
 
             if (_driversOnMap.TryAdd(coordinates, driver))
@@ -48,7 +60,7 @@ namespace maxim_technology_task.Services
             Coordinates newCoords = new Coordinates(x, y);
             if (_driversOnMap.TryAdd(newCoords, driver)) 
             {
-                RemoveOldCoordiantes(driver);
+                RemoveOldCoordinates(driver);
                 driver.Coordinates = newCoords;
                 Console.WriteLine($"Водителю {driver.ID} установлены новые координаты : X:{driver.Coordinates.X} и Y:{driver.Coordinates.Y}");
                 
@@ -57,7 +69,7 @@ namespace maxim_technology_task.Services
             return false;
         }
 
-        private void RemoveOldCoordiantes(Driver driver)
+        public void RemoveOldCoordinates(Driver driver)
         {
             _driversOnMap.Remove(driver.Coordinates);
         }
@@ -65,6 +77,13 @@ namespace maxim_technology_task.Services
         public bool VerificationValidCoordinates(int x, int y)
         {
             return x >= 0 && x < M && y >= 0 && y < N;
+        }
+
+        public Driver? DriverSearchByID(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return null;
+
+            return _driversOnMap.Values.FirstOrDefault(d => d.ID == id);
         }
     }
 }

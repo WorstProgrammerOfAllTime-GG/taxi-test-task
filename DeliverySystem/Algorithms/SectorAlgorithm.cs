@@ -1,12 +1,12 @@
-﻿using maxim_technology_task;
-using maxim_technology_task.Models;
-using maxim_technology_task.Services;
-using maxim_technology_task.Status;
+﻿using DeliverySystem;
+using DeliverySystem.Models;
+using DeliverySystem.Services;
+using DeliverySystem.Status;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task.Algorithms
+namespace DeliverySystem.Algorithms
 {
     public class SectorAlgorithm : IAlgorithm
     {
