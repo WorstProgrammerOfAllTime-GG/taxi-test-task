@@ -2,6 +2,7 @@ using DeliverySystem.Algorithms;
 using DeliverySystem.Services;
 using maxim_technology_task2;
 using maxim_technology_task2.endpoints;
+using maxim_technology_task2.Middlewares;
 using maxim_technology_task2.Services;
 
 
@@ -20,13 +21,16 @@ builder.Services.AddHttpClient<IRandomNumberService, RandomNumberService>(client
 });
 builder.Services.AddTransient<OrderService>();
 
+
 var app = builder.Build();
 
 var factory = app.Services.GetRequiredService<DriverFactory>();
 factory.CreateDrivers();
 
-app.PutDriverCoordinates();
-app.PostCreateOrder();
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseMiddleware<MiddlewareParallelLimit>();
+app.UseMiddleware<MiddlewareException>();
+app.PutDriverCoordinates();
+app.PostCreateOrder();
 app.Run();

@@ -36,7 +36,10 @@ namespace DeliverySystem.Algorithms
                             continue;
                         }
 
-                        result.Add(driverOnPoint);
+                        if (!result.Contains(driverOnPoint))
+                        {
+                            result.Add(driverOnPoint);
+                        }
 
                         if (result.Count == 5)
                         {

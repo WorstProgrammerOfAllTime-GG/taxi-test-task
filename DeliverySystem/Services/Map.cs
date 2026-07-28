@@ -12,6 +12,7 @@ namespace DeliverySystem.Services
     {
         private object locker = new object();
         private Dictionary<Coordinates, Driver> _driversOnMap = new Dictionary<Coordinates, Driver>();
+
         public IReadOnlyDictionary<Coordinates, Driver> DriversOnMap
         {
             get
@@ -24,29 +25,32 @@ namespace DeliverySystem.Services
         }
 
         private Random random = new Random();
+
         public int M { get; }
         public int N { get; }
 
-        public Map(int m, int n)
+        public Map(int n, int m)
         {
-            M = m; N = n;
-            Console.WriteLine($"Создана карта размерностью {M} * {N}");
+            N = n;
+            M = m;
+            Console.WriteLine($"Создана карта размерностью N:{N} * M:{M}");
         }
 
         public bool TryOccupyDriver(Driver driver)
         {
             lock (locker)
-            {  
-                    if (driver.Status == StatusDriver.Free)
-                    {
-                        driver.Status = StatusDriver.Busy;
-                        return true;
-                    }
-                    return false;           
+            {
+                if (driver.Status == StatusDriver.Free)
+                {
+                    driver.Status = StatusDriver.Busy;
+                    return true;
+                }
+
+                return false;
             }
         }
 
-        public bool TryAddDriver(string id, Coordinates coordinates, out Driver ? driver)
+        public bool TryAddDriver(string id, Coordinates coordinates, out Driver? driver)
         {
             lock (locker)
             {
@@ -62,11 +66,11 @@ namespace DeliverySystem.Services
 
                 return false;
             }
-
         }
+
         public bool AddDriverCoordinates(int x, int y, Driver driver)
         {
-            lock(locker)
+            lock (locker)
             {
                 var coordinates = new Coordinates(x, y);
 
@@ -75,28 +79,36 @@ namespace DeliverySystem.Services
                     driver.Coordinates = coordinates;
                     return true;
                 }
+
                 return false;
-            }         
+            }
         }
 
-        public bool TryChangeDriverCoordinates(Driver ? driver, int x, int y)
+        public bool TryChangeDriverCoordinates(Driver? driver, int x, int y)
         {
-            lock( locker)
+            lock (locker)
             {
                 if (driver == null)
                     throw new ArgumentException(nameof(driver), "Непредвиденная работа программы : driver is null");
 
                 if (!VerificationValidCoordinates(x, y))
                     return false;
+
                 Coordinates newCoords = new Coordinates(x, y);
+
                 if (_driversOnMap.TryAdd(newCoords, driver))
                 {
                     RemoveOldCoordinates(driver);
+
                     driver.Coordinates = newCoords;
-                    Console.WriteLine($"Водителю {driver.ID} установлены новые координаты : X:{driver.Coordinates.X} и Y:{driver.Coordinates.Y}");
+
+                    Console.WriteLine(
+                        $"Водителю {driver.ID} установлены новые координаты : X:{driver.Coordinates.X} и Y:{driver.Coordinates.Y}"
+                    );
 
                     return true;
                 }
+
                 return false;
             }
         }
@@ -116,9 +128,10 @@ namespace DeliverySystem.Services
 
         public Driver? DriverSearchByID(string id)
         {
-            lock(locker)
+            lock (locker)
             {
-                if (string.IsNullOrEmpty(id)) return null;
+                if (string.IsNullOrEmpty(id))
+                    return null;
 
                 return _driversOnMap.Values.FirstOrDefault(d => d.ID == id);
             }

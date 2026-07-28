@@ -6,7 +6,7 @@ namespace DeliverySystem.Models
 {
     public class Order
     {
-        public Coordinates Coordinates { get; }
+        public Coordinates DriverCoordinates { get; }
         public string OrderID { get; }
         public string ClientID { get; }
         public string DriverID { get; }
@@ -24,8 +24,7 @@ namespace DeliverySystem.Models
             ClientID = clientID;
             DriverID = driverID;
             Console.WriteLine($"Создан заказ {OrderID} от пользователя {ClientID}");
-            Coordinates = coordinates;
-            Console.WriteLine($"Координаты заказа {OrderID} установлены : X:{Coordinates.X} и Y:{Coordinates.Y}, водитель {DriverID} выехал");
+            DriverCoordinates = coordinates;
             RouteLength = routLength;
             RouteList = roudList;
         }

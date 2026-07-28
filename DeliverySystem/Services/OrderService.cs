@@ -31,7 +31,7 @@ namespace DeliverySystem.Services
                 throw new InvalidCoordinatesException("Координаты заданы неверно!");
             }
             Console.WriteLine("Координаты валидны.Запуск алгоритма поиска...");
-            var drivers = _algorithm.SearchDrivers(requestOrder.CoordinatesClient);
+            var drivers = _algorithm.SearchDrivers(requestOrder.CoordinatesClient);       
             if (drivers.Count == 0) throw new DriverNotFoundException("Водители не были найдены");
             int index;
             try
@@ -52,7 +52,7 @@ namespace DeliverySystem.Services
             int routeLength = CalculationRouteLength.CalulateRouteLength(requestOrder.CoordinatesClient, selectedDriver.Coordinates);
             List<Coordinates> routeList = ListCoordinates.CalculateListCoordinates(requestOrder.CoordinatesClient, selectedDriver.Coordinates);
             Console.WriteLine($"Алгоритм нашел водителя {selectedDriver.ID}.Создание финального заказа...");
-            Order order = new Order(requestOrder.ClientID, selectedDriver.ID, requestOrder.CoordinatesClient, routeLength, routeList);
+            Order order = new Order(requestOrder.ClientID, selectedDriver.ID, selectedDriver.Coordinates, routeLength, routeList);
             return order;                   
         }
 
