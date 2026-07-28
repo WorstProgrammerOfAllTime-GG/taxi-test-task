@@ -46,6 +46,7 @@ namespace DeliverySystem.Services
 
             var selectedDriver = drivers[index];
             selectedDriver.Status = StatusDriver.Busy;
+            int routeLength = CalculationRouteLength.CalulateRouteLength(requestOrder.CoordinatesClient, selectedDriver.Coordinates);
             Console.WriteLine($"Алгоритм нашел водителя {selectedDriver.ID}.Создание финального заказа...");
             Order order = new Order(requestOrder.ClientID, selectedDriver.ID, requestOrder.CoordinatesClient);
             return order;                   
