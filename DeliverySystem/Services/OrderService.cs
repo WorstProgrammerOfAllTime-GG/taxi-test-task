@@ -45,10 +45,14 @@ namespace DeliverySystem.Services
             }
 
             var selectedDriver = drivers[index];
-            selectedDriver.Status = StatusDriver.Busy;
+            if (!_map.TryOccupyDriver(selectedDriver))
+            {
+                throw new DriverNotFoundException("Водитель уже был занят другим заказом");
+            }
             int routeLength = CalculationRouteLength.CalulateRouteLength(requestOrder.CoordinatesClient, selectedDriver.Coordinates);
+            List<Coordinates> routeList = ListCoordinates.CalculateListCoordinates(requestOrder.CoordinatesClient, selectedDriver.Coordinates);
             Console.WriteLine($"Алгоритм нашел водителя {selectedDriver.ID}.Создание финального заказа...");
-            Order order = new Order(requestOrder.ClientID, selectedDriver.ID, requestOrder.CoordinatesClient);
+            Order order = new Order(requestOrder.ClientID, selectedDriver.ID, requestOrder.CoordinatesClient, routeLength, routeList);
             return order;                   
         }
 

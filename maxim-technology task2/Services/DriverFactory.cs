@@ -14,10 +14,10 @@ namespace maxim_technology_task2
 
         public void CreateDrivers()
         {
-            var drivers = _map.DriversOnMap;
             int attempts = 0;
             const int maxAttempts = 1000;
-            while (drivers.Count < 15 && attempts<maxAttempts)
+
+            while (_map.DriversOnMap.Count < 15 && attempts < maxAttempts)
             {
                 attempts++;
                 int x = Random.Shared.Next(0, _map.M);
@@ -27,13 +27,19 @@ namespace maxim_technology_task2
                 {
                     continue;
                 }
+
                 Driver driver = new Driver();
-                _map.AddDriverCoordinates(x, y, driver);
-                Console.WriteLine($"Водитель с ID {driver.ID}");
+
+                if (_map.AddDriverCoordinates(x, y, driver))
+                {
+                    Console.WriteLine($"Водитель с ID {driver.ID} успешно добавлен в [{x}, {y}]");
+                }
             }
 
-            if (drivers.Count < 15) throw new Exception("Не удалось разместить всех водителей на карте"); 
-
+            if (_map.DriversOnMap.Count < 15)
+            {
+                throw new Exception($"Не удалось разместить всех водителей на карте {_map.M}x{_map.N}. Добавлено только: {_map.DriversOnMap.Count}");
+            }
         }
     }
 }

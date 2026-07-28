@@ -8,7 +8,7 @@ namespace DeliverySystem.Services
 {
     public class ListCoordinates
     {
-        public List<Coordinates> CalculateListCoordinates(Coordinates coordClient, Coordinates coordDriver)
+        public static List<Coordinates> CalculateListCoordinates(Coordinates coordClient, Coordinates coordDriver)
         {
             List<Coordinates> route = new List<Coordinates>();
             int currentX = coordDriver.X;

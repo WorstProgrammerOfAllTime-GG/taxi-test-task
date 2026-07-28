@@ -12,14 +12,21 @@ int n = builder.Configuration.GetValue<int>("MapSettings:N",50);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<Map>(map=> new Map(m,n));
-
 builder.Services.AddSingleton<DriverFactory>();
+builder.Services.AddSingleton<IAlgorithm, GridSearchAlgorithm>();
+builder.Services.AddHttpClient<IRandomNumberService, RandomNumberService>(client =>
+{
+    client.Timeout = TimeSpan.FromMilliseconds(500);
+});
+builder.Services.AddTransient<OrderService>();
+
 var app = builder.Build();
 
 var factory = app.Services.GetRequiredService<DriverFactory>();
 factory.CreateDrivers();
 
 app.PutDriverCoordinates();
+app.PostCreateOrder();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.Run();
