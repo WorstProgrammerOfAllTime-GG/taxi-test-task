@@ -50,7 +50,7 @@ namespace DeliverySystem.Services
             return false;
         }
 
-        public bool TryChangeDriverCoordinates(Driver driver, int x, int y)
+        public bool TryChangeDriverCoordinates(Driver ? driver, int x, int y)
         {
             if (driver == null) 
                 throw new ArgumentException(nameof(driver), "Непредвиденная работа программы : driver is null");

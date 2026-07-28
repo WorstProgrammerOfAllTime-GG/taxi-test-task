@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="AlgorithmTesting/Testing.csproj" Id="c09cf39a-08ac-4007-ad02-045a5f852d86" />
+  <Project Path="Benchmark/Benchmark.csproj" Id="265efad7-1422-4bfe-a2f9-a15724ce5a36" />
   <Project Path="DeliverySystem/DeliverySystem.csproj" Id="aa4b296b-cd48-473a-b394-b4d749e49535" />
-  <Project Path="maxim-technology task/maxim-technology task.csproj" />
   <Project Path="maxim-technology task2/maxim-technology task2.csproj" Id="367ac0c3-6d8d-4b5d-a147-1afd5f177658" />
 </Solution>

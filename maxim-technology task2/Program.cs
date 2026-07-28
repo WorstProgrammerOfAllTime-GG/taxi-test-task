@@ -1,6 +1,8 @@
+using DeliverySystem.Algorithms;
 using DeliverySystem.Services;
 using maxim_technology_task2;
 using maxim_technology_task2.endpoints;
+using maxim_technology_task2.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
