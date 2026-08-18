@@ -1,15 +1,15 @@
-﻿using maxim_technology_task.Status;
+﻿using DeliverySystem.Status;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task.Models
+namespace DeliverySystem.Models
 {
     public class Driver
     {
         public Coordinates Coordinates { get; set; }
         public StatusDriver Status { get; set; }
-        public string ID { get; }
+        public string ID { get; init; }
 
         public Driver() 
         {            

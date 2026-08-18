@@ -1,39 +1,46 @@
-﻿using maxim_technology_task.Models;
-using maxim_technology_task.Services;
-using maxim_technology_task.Status;
+﻿using DeliverySystem.Models;
+using DeliverySystem.Services;
+using DeliverySystem.Status;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace maxim_technology_task.Algorithms
+namespace DeliverySystem.Algorithms
 {
     public class GridSearchAlgorithm : IAlgorithm
     {
-
         private readonly Map _map;
-        
+
         public GridSearchAlgorithm(Map map)
         {
             _map = map;
         }
 
-        public List<Driver> SearchDrivers(Coordinates coordsCleint)
+        public List<Driver> SearchDrivers(Coordinates coordsClient)
         {
             const int maxRadius = 100;
-            var drivers = _map.DriversOnMap;
-            int currentDistance = 0;       
-            List<Driver> result = new List<Driver>();      
-            while (result.Count < 5 && currentDistance<=maxRadius)
+            int currentDistance = 0;
+            List<Driver> result = new List<Driver>();
+
+            while (result.Count < 5 && currentDistance <= maxRadius)
             {
-                foreach (var coords in GetCoordinatesByRadius(coordsCleint, currentDistance))
+                foreach (var coords in GetCoordinatesByRadius(coordsClient, currentDistance))
                 {
-                    if (drivers.TryGetValue(coords, out Driver driver))
+                    var driverOnPoint = _map.DriversOnMap.Values
+                        .FirstOrDefault(d => d.Coordinates.X == coords.X && d.Coordinates.Y == coords.Y);
+
+                    if (driverOnPoint != null)
                     {
-                        if (driver.Status == StatusDriver.Busy)
+                        if (driverOnPoint.Status == StatusDriver.Busy)
                         {
                             continue;
                         }
-                        result.Add(driver);
+
+                        if (!result.Contains(driverOnPoint))
+                        {
+                            result.Add(driverOnPoint);
+                        }
+
                         if (result.Count == 5)
                         {
                             return result;
@@ -45,6 +52,7 @@ namespace maxim_technology_task.Algorithms
 
             return result;
         }
+
         public IEnumerable<Coordinates> GetCoordinatesByRadius(Coordinates center, int currentDistance)
         {
             for (int x = center.X - currentDistance; x <= center.X + currentDistance; x++)
@@ -61,8 +69,5 @@ namespace maxim_technology_task.Algorithms
                 }
             }
         }
-
-
-
     }
 }

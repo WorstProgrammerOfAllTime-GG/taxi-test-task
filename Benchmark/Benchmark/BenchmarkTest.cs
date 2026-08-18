@@ -7,7 +7,7 @@ using DeliverySystem;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeliverySystem.Benchmark
+namespace Benchmark
 {
     [MemoryDiagnoser]
     public class BenchmarkTest
